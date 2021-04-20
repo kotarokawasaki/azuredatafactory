@@ -1,0 +1,16 @@
+{
+	"name": "mongo_sink_dataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "CosmosDbMongoDbApi1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "CosmosDbMongoDbApiCollection",
+		"schema": [],
+		"typeProperties": {
+			"collection": "collectionsink1"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,9 @@
+{
+	"name": "adftrainingadfkotaro",
+	"location": "japaneast",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "4a226b67-fd75-4d13-913a-9e883d6d4a62",
+		"tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+	}
+}
