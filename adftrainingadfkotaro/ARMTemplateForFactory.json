@@ -43,11 +43,11 @@
 			"type": "string",
 			"defaultValue": "https://datalakegen2kotaro.dfs.core.windows.net"
 		},
-		"Trigger_ne5_properties_pipeline_parameters_windowStart": {
+		"Trigger_hyo_properties_pipeline_parameters_windowStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
 		},
-		"Trigger_ne5_properties_pipeline_parameters_windowEnd": {
+		"Trigger_hyo_properties_pipeline_parameters_windowEnd": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		}
@@ -57,13 +57,13 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/DeltaCopyFromBlobPipeline2')]",
+			"name": "[concat(parameters('factoryName'), '/DeltaCopyFromBlobPipeline')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "Copy_ne5",
+						"name": "Copy_hyo",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -80,12 +80,12 @@
 							},
 							{
 								"name": "Destination",
-								"value": "destination//copied"
+								"value": "destination//"
 							}
 						],
 						"typeProperties": {
 							"source": {
-								"type": "ExcelSource",
+								"type": "BinarySource",
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,
@@ -97,105 +97,6 @@
 										"value": "@pipeline().parameters.windowEnd",
 										"type": "Expression"
 									},
-									"wildcardFileName": "*",
-									"enablePartitionDiscovery": false
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings",
-									"copyBehavior": "MergeFiles"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".txt"
-								}
-							},
-							"enableStaging": false,
-							"enableSkipIncompatibleRow": true,
-							"validateDataConsistency": false,
-							"logSettings": {
-								"enableCopyActivityLog": true,
-								"copyActivityLogSettings": {
-									"logLevel": "Info",
-									"enableReliableLogging": false
-								},
-								"logLocationSettings": {
-									"linkedServiceName": {
-										"referenceName": "AzureBlobStorage1",
-										"type": "LinkedServiceReference"
-									},
-									"path": ""
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "SourceDataset_ne5",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "DestinationDataset_ne5",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"parameters": {
-					"windowStart": {
-						"type": "String"
-					},
-					"windowEnd": {
-						"type": "String"
-					}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SourceDataset_ne5')]",
-				"[concat(variables('factoryId'), '/datasets/DestinationDataset_ne5')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Deltacopyfromblobpipeline')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Copy_wjt",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "source//"
-							},
-							{
-								"name": "Destination",
-								"value": "source//"
-							}
-						],
-						"typeProperties": {
-							"source": {
-								"type": "BinarySource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
 									"wildcardFileName": "*"
 								},
 								"formatSettings": {
@@ -217,25 +118,33 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "SourceDataset_wjt",
+								"referenceName": "SourceDataset_hyo",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "DestinationDataset_wjt",
+								"referenceName": "DestinationDataset_hyo",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						]
 					}
 				],
+				"parameters": {
+					"windowStart": {
+						"type": "String"
+					},
+					"windowEnd": {
+						"type": "String"
+					}
+				},
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SourceDataset_wjt')]",
-				"[concat(variables('factoryId'), '/datasets/DestinationDataset_wjt')]"
+				"[concat(variables('factoryId'), '/datasets/SourceDataset_hyo')]",
+				"[concat(variables('factoryId'), '/datasets/DestinationDataset_hyo')]"
 			]
 		},
 		{
@@ -386,56 +295,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Wait1",
-						"type": "Wait",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"waitTimeInSeconds": 1
-						}
-					}
-				],
-				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/repro_debugblock')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Web1",
-						"type": "WebActivity",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.00:05:00",
-							"retry": 3,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": true,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"url": "http://dummy.restapiexample.com/api/v1/create",
-							"method": "GET",
-							"headers": {}
-						}
-					}
-				],
-				"annotations": [],
-				"lastPublishTime": "2021-03-24T03:13:17Z"
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlTable1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -508,6 +367,28 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_hyo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "destination"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DestinationDataset_ne5')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -536,6 +417,28 @@
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/DestinationDataset_wjt')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "source"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_hyo')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -759,28 +662,52 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Trigger_hyo')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "DeltaCopyFromBlobPipeline",
+						"type": "PipelineReference"
+					},
+					"parameters": {
+						"windowStart": {
+							"type": "Expression",
+							"value": "[parameters('Trigger_hyo_properties_pipeline_parameters_windowStart')]"
+						},
+						"windowEnd": {
+							"type": "Expression",
+							"value": "[parameters('Trigger_hyo_properties_pipeline_parameters_windowEnd')]"
+						}
+					}
+				},
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Minute",
+					"interval": 5,
+					"startTime": "2021-05-04T23:30:00Z",
+					"delay": "00:00:00",
+					"maxConcurrency": 50,
+					"retryPolicy": {
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/DeltaCopyFromBlobPipeline')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Trigger_ne5')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"runtimeState": "Stopped",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "DeltaCopyFromBlobPipeline2",
-						"type": "PipelineReference"
-					},
-					"parameters": {
-						"windowStart": {
-							"type": "Expression",
-							"value": "[parameters('Trigger_ne5_properties_pipeline_parameters_windowStart')]"
-						},
-						"windowEnd": {
-							"type": "Expression",
-							"value": "[parameters('Trigger_ne5_properties_pipeline_parameters_windowEnd')]"
-						}
-					}
-				},
 				"type": "TumblingWindowTrigger",
 				"typeProperties": {
 					"frequency": "Minute",
@@ -795,9 +722,7 @@
 					"dependsOn": []
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/DeltaCopyFromBlobPipeline2')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Trigger_wjt')]",
@@ -806,13 +731,6 @@
 			"properties": {
 				"annotations": [],
 				"runtimeState": "Stopped",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "Deltacopyfromblobpipeline",
-						"type": "PipelineReference"
-					},
-					"parameters": {}
-				},
 				"type": "TumblingWindowTrigger",
 				"typeProperties": {
 					"frequency": "Minute",
@@ -827,9 +745,7 @@
 					"dependsOn": []
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Deltacopyfromblobpipeline')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/trigger1')]",

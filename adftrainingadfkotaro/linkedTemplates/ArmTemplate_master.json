@@ -43,11 +43,11 @@
 			"type": "string",
 			"defaultValue": "https://datalakegen2kotaro.dfs.core.windows.net"
 		},
-		"Trigger_ne5_properties_pipeline_parameters_windowStart": {
+		"Trigger_hyo_properties_pipeline_parameters_windowStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
 		},
-		"Trigger_ne5_properties_pipeline_parameters_windowEnd": {
+		"Trigger_hyo_properties_pipeline_parameters_windowEnd": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
@@ -96,9 +96,6 @@
 					"linkedService4_connectionString": {
 						"value": "[parameters('linkedService4_connectionString')]"
 					},
-					"AzureBlobStorage2_connectionString": {
-						"value": "[parameters('AzureBlobStorage2_connectionString')]"
-					},
 					"CosmosDbMongoDbApi1_properties_typeProperties_database": {
 						"value": "[parameters('CosmosDbMongoDbApi1_properties_typeProperties_database')]"
 					},
@@ -123,11 +120,14 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"Trigger_ne5_properties_pipeline_parameters_windowStart": {
-						"value": "[parameters('Trigger_ne5_properties_pipeline_parameters_windowStart')]"
+					"AzureBlobStorage2_connectionString": {
+						"value": "[parameters('AzureBlobStorage2_connectionString')]"
 					},
-					"Trigger_ne5_properties_pipeline_parameters_windowEnd": {
-						"value": "[parameters('Trigger_ne5_properties_pipeline_parameters_windowEnd')]"
+					"Trigger_hyo_properties_pipeline_parameters_windowStart": {
+						"value": "[parameters('Trigger_hyo_properties_pipeline_parameters_windowStart')]"
+					},
+					"Trigger_hyo_properties_pipeline_parameters_windowEnd": {
+						"value": "[parameters('Trigger_hyo_properties_pipeline_parameters_windowEnd')]"
 					}
 				}
 			},
