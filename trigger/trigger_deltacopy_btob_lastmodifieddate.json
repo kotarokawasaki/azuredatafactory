@@ -2,7 +2,7 @@
 	"name": "trigger_deltacopy_btob_lastmodifieddate",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Started",
+		"runtimeState": "Stopped",
 		"pipeline": {
 			"pipelineReference": {
 				"referenceName": "deltacopy_btob_by_last_modifieddate",
