@@ -9,11 +9,11 @@
 		},
 		"trigger_tumbling__properties_pipeline_parameters_windowStart": {
 			"type": "string",
-			"defaultValue": "value_start"
+			"defaultValue": "@{concat('output',formatDateTime(trigger().outputs.windowStartTime,'-dd-MM-yyyy-HH-mm-ss-ffff'))}"
 		},
 		"trigger_tumbling__properties_pipeline_parameters_windowEnd": {
 			"type": "string",
-			"defaultValue": "value_end"
+			"defaultValue": "@{concat('output',formatDateTime(trigger().outputs.windowStartTime,'-dd-MM-yyyy-HH-mm-ss-ffff'))}"
 		}
 	},
 	"variables": {

@@ -33,10 +33,10 @@
 			"value": "https://datalakegen2kotaro.dfs.core.windows.net"
 		},
 		"trigger_tumbling__properties_pipeline_parameters_windowStart": {
-			"value": "value_start"
+			"value": "@{concat('output',formatDateTime(trigger().outputs.windowStartTime,'-dd-MM-yyyy-HH-mm-ss-ffff'))}"
 		},
 		"trigger_tumbling__properties_pipeline_parameters_windowEnd": {
-			"value": "value_end"
+			"value": "@{concat('output',formatDateTime(trigger().outputs.windowStartTime,'-dd-MM-yyyy-HH-mm-ss-ffff'))}"
 		}
 	}
 }
