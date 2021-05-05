@@ -2,7 +2,7 @@
 	"name": "tumbling_tregger_lastmodifieddate_delta",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Started",
+		"runtimeState": "Stopped",
 		"pipeline": {
 			"pipelineReference": {
 				"referenceName": "deltacopy_btob_by_last_modifieddate",
