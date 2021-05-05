@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy_t7f",
+				"name": "deltacopy_btob_lastmodifieddate",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {

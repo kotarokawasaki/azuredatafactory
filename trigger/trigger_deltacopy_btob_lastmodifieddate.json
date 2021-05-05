@@ -1,5 +1,5 @@
 {
-	"name": "Trigger_t7f",
+	"name": "trigger_deltacopy_btob_lastmodifieddate",
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Stopped",
@@ -23,7 +23,7 @@
 		"typeProperties": {
 			"frequency": "Minute",
 			"interval": 5,
-			"startTime": "2021-05-05T10:20:00Z",
+			"startTime": "2021-05-05T10:25:00Z",
 			"endTime": "2021-05-05T11:00:00Z",
 			"delay": "00:00:00",
 			"maxConcurrency": 50,
