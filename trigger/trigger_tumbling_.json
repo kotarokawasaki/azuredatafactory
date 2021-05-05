@@ -7,13 +7,17 @@
 			"pipelineReference": {
 				"referenceName": "DeltaCopyFromBlobPipeline",
 				"type": "PipelineReference"
+			},
+			"parameters": {
+				"windowStart": "value_start",
+				"windowEnd": "value_end"
 			}
 		},
 		"type": "TumblingWindowTrigger",
 		"typeProperties": {
 			"frequency": "Minute",
 			"interval": 5,
-			"startTime": "2021-05-05T06:00:00Z",
+			"startTime": "2021-05-05T06:10:00Z",
 			"endTime": "2021-05-05T15:00:00Z",
 			"delay": "00:00:00",
 			"maxConcurrency": 50,
