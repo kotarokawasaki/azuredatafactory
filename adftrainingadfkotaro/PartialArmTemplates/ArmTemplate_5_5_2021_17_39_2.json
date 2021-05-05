@@ -6,14 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "adftrainingadfkotaro"
-		},
-		"tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowStart": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowStartTime"
-		},
-		"tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowEnd": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndTime"
 		}
 	},
 	"variables": {
@@ -35,11 +27,11 @@
 					"parameters": {
 						"windowStart": {
 							"type": "Expression",
-							"value": "[parameters('tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowStart')]"
+							"value": "@trigger().outputs.windowStartTime"
 						},
 						"windowEnd": {
 							"type": "Expression",
-							"value": "[parameters('tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowEnd')]"
+							"value": "@trigger().outputs.windowEndTime"
 						}
 					}
 				},

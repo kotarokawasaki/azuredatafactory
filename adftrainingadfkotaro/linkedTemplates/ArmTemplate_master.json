@@ -43,11 +43,11 @@
 			"type": "string",
 			"defaultValue": "https://datalakegen2kotaro.dfs.core.windows.net"
 		},
-		"trigger_deltacopy_btob_lastmodifieddate_properties_pipeline_parameters_windowStart": {
+		"tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
 		},
-		"trigger_deltacopy_btob_lastmodifieddate_properties_pipeline_parameters_windowEnd": {
+		"tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowEnd": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
@@ -123,11 +123,11 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
-					"trigger_deltacopy_btob_lastmodifieddate_properties_pipeline_parameters_windowStart": {
-						"value": "[parameters('trigger_deltacopy_btob_lastmodifieddate_properties_pipeline_parameters_windowStart')]"
+					"tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowStart": {
+						"value": "[parameters('tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowStart')]"
 					},
-					"trigger_deltacopy_btob_lastmodifieddate_properties_pipeline_parameters_windowEnd": {
-						"value": "[parameters('trigger_deltacopy_btob_lastmodifieddate_properties_pipeline_parameters_windowEnd')]"
+					"tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowEnd": {
+						"value": "[parameters('tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowEnd')]"
 					}
 				}
 			},
