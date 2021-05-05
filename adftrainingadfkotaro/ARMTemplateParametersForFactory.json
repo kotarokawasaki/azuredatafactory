@@ -32,11 +32,11 @@
 		"datalake2_linkedservice_properties_typeProperties_url": {
 			"value": "https://datalakegen2kotaro.dfs.core.windows.net"
 		},
-		"Trigger_hyo_properties_pipeline_parameters_windowStart": {
-			"value": "@trigger().outputs.windowStartTime"
+		"trigger_tumbling__properties_pipeline_parameters_windowStart": {
+			"value": "value_start"
 		},
-		"Trigger_hyo_properties_pipeline_parameters_windowEnd": {
-			"value": "@trigger().outputs.windowEndTime"
+		"trigger_tumbling__properties_pipeline_parameters_windowEnd": {
+			"value": "value_end"
 		}
 	}
 }
