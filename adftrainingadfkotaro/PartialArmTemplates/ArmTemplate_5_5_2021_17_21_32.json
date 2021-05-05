@@ -6,14 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "adftrainingadfkotaro"
-		},
-		"trigger_deltacopy_btob_lastmodifieddate_properties_pipeline_parameters_windowStart": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowStartTime"
-		},
-		"trigger_deltacopy_btob_lastmodifieddate_properties_pipeline_parameters_windowEnd": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndTime"
 		}
 	},
 	"variables": {
@@ -83,15 +75,13 @@
 						"inputs": [
 							{
 								"referenceName": "SourceDataset_t7f",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "DestinationDataset_t7f",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
@@ -105,6 +95,49 @@
 					}
 				},
 				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/SourceDataset_t7f')]",
+				"[concat(variables('factoryId'), '/datasets/DestinationDataset_t7f')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_t7f')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "destination"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_t7f')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "source"
+					}
+				}
 			},
 			"dependsOn": []
 		},
@@ -123,11 +156,11 @@
 					"parameters": {
 						"windowStart": {
 							"type": "Expression",
-							"value": "[parameters('trigger_deltacopy_btob_lastmodifieddate_properties_pipeline_parameters_windowStart')]"
+							"value": "@trigger().outputs.windowStartTime"
 						},
 						"windowEnd": {
 							"type": "Expression",
-							"value": "[parameters('trigger_deltacopy_btob_lastmodifieddate_properties_pipeline_parameters_windowEnd')]"
+							"value": "@trigger().outputs.windowEndTime"
 						}
 					}
 				},
@@ -148,35 +181,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/deltacopy_btob_by_last_modifieddate')]"
 			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/trigger1')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "csv_to_sql",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Minute",
-						"interval": 15,
-						"startTime": "2021-03-21T14:23:00Z",
-						"endTime": "2021-03-22T14:33:00Z",
-						"timeZone": "UTC"
-					}
-				}
-			},
-			"dependsOn": []
 		}
 	]
 }
