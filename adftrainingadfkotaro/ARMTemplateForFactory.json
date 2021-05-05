@@ -42,14 +42,6 @@
 		"datalake2_linkedservice_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://datalakegen2kotaro.dfs.core.windows.net"
-		},
-		"trigger_tumbling__properties_pipeline_parameters_windowStart": {
-			"type": "string",
-			"defaultValue": "@{concat('output',formatDateTime(trigger().outputs.windowStartTime,'-dd-MM-yyyy-HH-mm-ss-ffff'))}"
-		},
-		"trigger_tumbling__properties_pipeline_parameters_windowEnd": {
-			"type": "string",
-			"defaultValue": "@{concat('output',formatDateTime(trigger().outputs.windowStartTime,'-dd-MM-yyyy-HH-mm-ss-ffff'))}"
 		}
 	},
 	"variables": {
@@ -698,17 +690,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Started",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "DeltaCopyFromBlobPipeline",
-						"type": "PipelineReference"
-					},
-					"parameters": {
-						"windowStart": "[parameters('trigger_tumbling__properties_pipeline_parameters_windowStart')]",
-						"windowEnd": "[parameters('trigger_tumbling__properties_pipeline_parameters_windowEnd')]"
-					}
-				},
+				"runtimeState": "Stopped",
 				"type": "TumblingWindowTrigger",
 				"typeProperties": {
 					"frequency": "Minute",
@@ -723,9 +705,7 @@
 					"dependsOn": []
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/DeltaCopyFromBlobPipeline')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/integrationRuntime1')]",

@@ -32,12 +32,6 @@
 		"datalake2_linkedservice_properties_typeProperties_url": {
 			"value": "https://datalakegen2kotaro.dfs.core.windows.net"
 		},
-		"trigger_tumbling__properties_pipeline_parameters_windowStart": {
-			"value": "@{concat('output',formatDateTime(trigger().outputs.windowStartTime,'-dd-MM-yyyy-HH-mm-ss-ffff'))}"
-		},
-		"trigger_tumbling__properties_pipeline_parameters_windowEnd": {
-			"value": "@{concat('output',formatDateTime(trigger().outputs.windowStartTime,'-dd-MM-yyyy-HH-mm-ss-ffff'))}"
-		},
 		"containerUri": {
 			"value": ""
 		},

@@ -43,14 +43,6 @@
 			"type": "string",
 			"defaultValue": "https://datalakegen2kotaro.dfs.core.windows.net"
 		},
-		"trigger_tumbling__properties_pipeline_parameters_windowStart": {
-			"type": "string",
-			"defaultValue": "@{concat('output',formatDateTime(trigger().outputs.windowStartTime,'-dd-MM-yyyy-HH-mm-ss-ffff'))}"
-		},
-		"trigger_tumbling__properties_pipeline_parameters_windowEnd": {
-			"type": "string",
-			"defaultValue": "@{concat('output',formatDateTime(trigger().outputs.windowStartTime,'-dd-MM-yyyy-HH-mm-ss-ffff'))}"
-		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -122,12 +114,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"trigger_tumbling__properties_pipeline_parameters_windowStart": {
-						"value": "[parameters('trigger_tumbling__properties_pipeline_parameters_windowStart')]"
-					},
-					"trigger_tumbling__properties_pipeline_parameters_windowEnd": {
-						"value": "[parameters('trigger_tumbling__properties_pipeline_parameters_windowEnd')]"
 					}
 				}
 			},
