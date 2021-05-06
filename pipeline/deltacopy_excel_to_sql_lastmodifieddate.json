@@ -46,7 +46,22 @@
 						"tableOption": "autoCreate"
 					},
 					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
 					"validateDataConsistency": false,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Warning",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "AzureBlobStorage1",
+								"type": "LinkedServiceReference"
+							},
+							"path": "source"
+						}
+					},
 					"translator": {
 						"type": "TabularTranslator",
 						"mappings": [
