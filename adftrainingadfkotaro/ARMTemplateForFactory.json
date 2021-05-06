@@ -343,14 +343,6 @@
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,
-									"modifiedDatetimeStart": {
-										"value": "@pipeline().parameters.windowStart",
-										"type": "Expression"
-									},
-									"modifiedDatetimeEnd": {
-										"value": "@pipeline().parameters.windowEnd",
-										"type": "Expression"
-									},
 									"wildcardFileName": "*",
 									"enablePartitionDiscovery": false
 								}
@@ -373,7 +365,7 @@
 										"referenceName": "AzureBlobStorage1",
 										"type": "LinkedServiceReference"
 									},
-									"path": "source"
+									"path": "log"
 								}
 							},
 							"translator": {
@@ -604,7 +596,7 @@
 					"sheetName": "Sheet1",
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"container": "source"
+						"container": "sourcedata"
 					},
 					"firstRowAsHeader": true
 				},
