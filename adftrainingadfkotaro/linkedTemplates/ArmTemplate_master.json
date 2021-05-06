@@ -51,19 +51,19 @@
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
-		"tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowStart": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowStartTime"
-		},
-		"tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowEnd": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndTime"
-		},
 		"Trigger_exceltosql_properties_pipeline_parameters_windowStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
 		},
 		"Trigger_exceltosql_properties_pipeline_parameters_windowEnd": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowStart": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowEnd": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
@@ -145,17 +145,17 @@
 					"Trigger_2we_properties_pipeline_parameters_windowEnd": {
 						"value": "[parameters('Trigger_2we_properties_pipeline_parameters_windowEnd')]"
 					},
-					"tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowStart": {
-						"value": "[parameters('tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowStart')]"
-					},
-					"tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowEnd": {
-						"value": "[parameters('tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowEnd')]"
-					},
 					"Trigger_exceltosql_properties_pipeline_parameters_windowStart": {
 						"value": "[parameters('Trigger_exceltosql_properties_pipeline_parameters_windowStart')]"
 					},
 					"Trigger_exceltosql_properties_pipeline_parameters_windowEnd": {
 						"value": "[parameters('Trigger_exceltosql_properties_pipeline_parameters_windowEnd')]"
+					},
+					"tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowStart": {
+						"value": "[parameters('tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowStart')]"
+					},
+					"tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowEnd": {
+						"value": "[parameters('tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowEnd')]"
 					}
 				}
 			},
