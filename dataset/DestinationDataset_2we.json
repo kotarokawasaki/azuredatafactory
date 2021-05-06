@@ -9,8 +9,8 @@
 		"type": "AzureSqlTable",
 		"schema": [],
 		"typeProperties": {
-			"schema": "bdo",
-			"table": "deltacopy"
+			"schema": "dbo",
+			"table": "primarykey"
 		}
 	}
 }
