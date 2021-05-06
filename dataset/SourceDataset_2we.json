@@ -11,7 +11,7 @@
 			"sheetName": "Sheet1",
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"container": "source"
+				"container": "sourcedata"
 			},
 			"firstRowAsHeader": true
 		},
