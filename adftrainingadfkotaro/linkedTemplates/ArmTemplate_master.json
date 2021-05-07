@@ -11,14 +11,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
 		},
-		"AzureBlobStorage2_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage2'"
-		},
-		"AzureBlobStorage3_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage3'"
-		},
 		"AzureSqlDatabase1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
@@ -59,11 +51,11 @@
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
-		"tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowStart": {
+		"datalakegen2exceltosql_properties_pipeline_parameters_windowStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
 		},
-		"tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowEnd": {
+		"datalakegen2exceltosql_properties_pipeline_parameters_windowEnd": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
@@ -97,9 +89,6 @@
 					"AzureBlobStorage1_connectionString": {
 						"value": "[parameters('AzureBlobStorage1_connectionString')]"
 					},
-					"AzureBlobStorage3_connectionString": {
-						"value": "[parameters('AzureBlobStorage3_connectionString')]"
-					},
 					"AzureSqlDatabase1_connectionString": {
 						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
 					},
@@ -111,9 +100,6 @@
 					},
 					"linkedService4_connectionString": {
 						"value": "[parameters('linkedService4_connectionString')]"
-					},
-					"AzureBlobStorage2_connectionString": {
-						"value": "[parameters('AzureBlobStorage2_connectionString')]"
 					},
 					"CosmosDbMongoDbApi1_properties_typeProperties_database": {
 						"value": "[parameters('CosmosDbMongoDbApi1_properties_typeProperties_database')]"
@@ -151,11 +137,11 @@
 					"Trigger_exceltosql_properties_pipeline_parameters_windowEnd": {
 						"value": "[parameters('Trigger_exceltosql_properties_pipeline_parameters_windowEnd')]"
 					},
-					"tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowStart": {
-						"value": "[parameters('tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowStart')]"
+					"datalakegen2exceltosql_properties_pipeline_parameters_windowStart": {
+						"value": "[parameters('datalakegen2exceltosql_properties_pipeline_parameters_windowStart')]"
 					},
-					"tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowEnd": {
-						"value": "[parameters('tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowEnd')]"
+					"datalakegen2exceltosql_properties_pipeline_parameters_windowEnd": {
+						"value": "[parameters('datalakegen2exceltosql_properties_pipeline_parameters_windowEnd')]"
 					}
 				}
 			},

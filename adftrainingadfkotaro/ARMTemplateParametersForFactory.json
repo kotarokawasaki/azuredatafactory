@@ -8,12 +8,6 @@
 		"AzureBlobStorage1_connectionString": {
 			"value": ""
 		},
-		"AzureBlobStorage2_connectionString": {
-			"value": ""
-		},
-		"AzureBlobStorage3_connectionString": {
-			"value": ""
-		},
 		"AzureSqlDatabase1_connectionString": {
 			"value": ""
 		},
@@ -44,10 +38,10 @@
 		"Trigger_exceltosql_properties_pipeline_parameters_windowEnd": {
 			"value": "@trigger().outputs.windowEndTime"
 		},
-		"tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowStart": {
+		"datalakegen2exceltosql_properties_pipeline_parameters_windowStart": {
 			"value": "@trigger().outputs.windowStartTime"
 		},
-		"tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowEnd": {
+		"datalakegen2exceltosql_properties_pipeline_parameters_windowEnd": {
 			"value": "@trigger().outputs.windowEndTime"
 		}
 	}

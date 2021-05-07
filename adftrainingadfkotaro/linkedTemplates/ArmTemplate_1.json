@@ -23,11 +23,11 @@
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
-		"tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowStart": {
+		"datalakegen2exceltosql_properties_pipeline_parameters_windowStart": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
 		},
-		"tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowEnd": {
+		"datalakegen2exceltosql_properties_pipeline_parameters_windowEnd": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		}
@@ -36,6 +36,96 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/mongo_sink_dataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "CosmosDbMongoDbApi1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CosmosDbMongoDbApiCollection",
+				"schema": [],
+				"typeProperties": {
+					"collection": "collectionsink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/mongo_source_dataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "CosmosDbMongoDbApi1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CosmosDbMongoDbApiCollection",
+				"schema": [],
+				"typeProperties": {
+					"collection": "collectionsource"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Mongo-api-pipeline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "CosmosDbMongoDbApiSource",
+								"batchSize": 100
+							},
+							"sink": {
+								"type": "CosmosDbMongoDbApiSink",
+								"writeBatchTimeout": "00:30:00",
+								"writeBehavior": "insert"
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "mongo_source_dataset",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "mongo_sink_dataset",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": [],
+				"lastPublishTime": "2021-04-20T02:55:22Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/mongo_source_dataset')]",
+				"[concat(variables('factoryId'), '/datasets/mongo_sink_dataset')]"
+			]
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/csv_to_sql')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
@@ -127,13 +217,13 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/deltacopy_btob_by_last_modifieddate')]",
+			"name": "[concat(parameters('factoryName'), '/datalake_to_sql_pipeline')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "deltacopy_btob_lastmodifieddate",
+						"name": "datalake_to_sql",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -155,47 +245,31 @@
 						],
 						"typeProperties": {
 							"source": {
-								"type": "BinarySource",
+								"type": "ExcelSource",
 								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
+									"type": "AzureBlobFSReadSettings",
 									"recursive": true,
-									"modifiedDatetimeStart": {
-										"value": "@pipeline().parameters.windowStart",
-										"type": "Expression"
-									},
-									"modifiedDatetimeEnd": {
-										"value": "@pipeline().parameters.windowEnd",
-										"type": "Expression"
-									},
-									"wildcardFileName": "*"
-								},
-								"formatSettings": {
-									"type": "BinaryReadSettings"
+									"wildcardFileName": "*",
+									"enablePartitionDiscovery": false
 								}
 							},
 							"sink": {
-								"type": "BinarySink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings"
-								}
+								"type": "AzureSqlSink"
 							},
 							"enableStaging": false,
 							"enableSkipIncompatibleRow": false,
-							"skipErrorFile": {
-								"fileMissing": true
-							},
 							"validateDataConsistency": false
 						},
 						"inputs": [
 							{
-								"referenceName": "SourceDataset_t7f",
+								"referenceName": "datalakegen2exceldataset",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "DestinationDataset_t7f",
+								"referenceName": "AzureSqlTable_sink_datalake",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -221,7 +295,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Copy_2we",
+						"name": "blob_to_sql",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -427,25 +501,25 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/tumbling_tregger_lastmodifieddate_delta')]",
+			"name": "[concat(parameters('factoryName'), '/datalakegen2exceltosql')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Stopped",
+				"runtimeState": "Started",
 				"pipeline": {
 					"pipelineReference": {
-						"referenceName": "deltacopy_btob_by_last_modifieddate",
+						"referenceName": "datalake_to_sql_pipeline",
 						"type": "PipelineReference"
 					},
 					"parameters": {
 						"windowStart": {
 							"type": "Expression",
-							"value": "[parameters('tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowStart')]"
+							"value": "[parameters('datalakegen2exceltosql_properties_pipeline_parameters_windowStart')]"
 						},
 						"windowEnd": {
 							"type": "Expression",
-							"value": "[parameters('tumbling_tregger_lastmodifieddate_delta_properties_pipeline_parameters_windowEnd')]"
+							"value": "[parameters('datalakegen2exceltosql_properties_pipeline_parameters_windowEnd')]"
 						}
 					}
 				},
@@ -453,8 +527,7 @@
 				"typeProperties": {
 					"frequency": "Minute",
 					"interval": 5,
-					"startTime": "2021-05-05T08:40:00Z",
-					"endTime": "2021-05-06T08:50:00Z",
+					"startTime": "2021-05-07T03:40:00Z",
 					"delay": "00:00:00",
 					"maxConcurrency": 50,
 					"retryPolicy": {
@@ -464,7 +537,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/deltacopy_btob_by_last_modifieddate')]"
+				"[concat(variables('factoryId'), '/pipelines/datalake_to_sql_pipeline')]"
 			]
 		}
 	]
