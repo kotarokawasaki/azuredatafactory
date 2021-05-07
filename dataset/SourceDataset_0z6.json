@@ -1,0 +1,17 @@
+{
+	"name": "SourceDataset_0z6",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datalake2_linkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "source"
+			}
+		}
+	}
+}
