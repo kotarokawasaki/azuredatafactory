@@ -1,5 +1,5 @@
 {
-	"name": "deltacopy_excel_to_sql_lastmodifieddate",
+	"name": "blob_to_sql_lastmodifieddate",
 	"properties": {
 		"activities": [
 			{

@@ -5,7 +5,7 @@
 		"runtimeState": "Stopped",
 		"pipeline": {
 			"pipelineReference": {
-				"referenceName": "deltacopy_excel_to_sql_lastmodifieddate",
+				"referenceName": "blob_to_sql_lastmodifieddate",
 				"type": "PipelineReference"
 			},
 			"parameters": {
