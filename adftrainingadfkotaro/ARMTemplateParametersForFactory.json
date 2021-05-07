@@ -17,6 +17,9 @@
 		"datalake2_linkedservice_accountKey": {
 			"value": ""
 		},
+		"exceldedicated_connectionString": {
+			"value": ""
+		},
 		"linkedService4_connectionString": {
 			"value": ""
 		},
