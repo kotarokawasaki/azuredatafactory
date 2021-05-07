@@ -1,0 +1,20 @@
+{
+	"name": "datalakegen2exceldataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datalake2_linkedservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "sheet1",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "source"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": []
+	}
+}

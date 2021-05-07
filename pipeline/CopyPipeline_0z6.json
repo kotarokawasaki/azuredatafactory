@@ -25,22 +25,11 @@
 				],
 				"typeProperties": {
 					"source": {
-						"type": "BinarySource",
+						"type": "ExcelSource",
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
-							"modifiedDatetimeStart": {
-								"value": "@pipeline().parameters.windowStart",
-								"type": "Expression"
-							},
-							"modifiedDatetimeEnd": {
-								"value": "@pipeline().parameters.windowEnd",
-								"type": "Expression"
-							},
-							"wildcardFileName": "*"
-						},
-						"formatSettings": {
-							"type": "BinaryReadSettings"
+							"enablePartitionDiscovery": false
 						}
 					},
 					"sink": {
@@ -51,14 +40,11 @@
 					},
 					"enableStaging": false,
 					"enableSkipIncompatibleRow": false,
-					"skipErrorFile": {
-						"fileMissing": true
-					},
 					"validateDataConsistency": false
 				},
 				"inputs": [
 					{
-						"referenceName": "SourceDataset_0z6",
+						"referenceName": "datalakegen2exceldataset",
 						"type": "DatasetReference"
 					}
 				],
