@@ -37,7 +37,7 @@
 						"type": "AzureSqlSink"
 					},
 					"enableStaging": false,
-					"enableSkipIncompatibleRow": false,
+					"enableSkipIncompatibleRow": true,
 					"validateDataConsistency": false
 				},
 				"inputs": [
