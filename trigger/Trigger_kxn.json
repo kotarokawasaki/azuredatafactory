@@ -1,0 +1,35 @@
+{
+	"name": "Trigger_kxn",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipeline": {
+			"pipelineReference": {
+				"referenceName": "exceltosql",
+				"type": "PipelineReference"
+			},
+			"parameters": {
+				"windowStart": {
+					"type": "Expression",
+					"value": "@trigger().outputs.windowStartTime"
+				},
+				"windowEnd": {
+					"type": "Expression",
+					"value": "@trigger().outputs.windowEndTime"
+				}
+			}
+		},
+		"type": "TumblingWindowTrigger",
+		"typeProperties": {
+			"frequency": "Hour",
+			"interval": 24,
+			"startTime": "2021-05-07T08:00:00Z",
+			"delay": "00:00:00",
+			"maxConcurrency": 50,
+			"retryPolicy": {
+				"intervalInSeconds": 30
+			},
+			"dependsOn": []
+		}
+	}
+}
