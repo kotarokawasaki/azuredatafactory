@@ -1,9 +1,9 @@
 {
-	"name": "CopyPipeline_0z6",
+	"name": "datalake_to_sql_pipeline",
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy_0z6",
+				"name": "datalake_to_sql",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -33,10 +33,7 @@
 						}
 					},
 					"sink": {
-						"type": "BinarySink",
-						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings"
-						}
+						"type": "AzureSqlSink"
 					},
 					"enableStaging": false,
 					"enableSkipIncompatibleRow": false,
@@ -50,7 +47,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "DestinationDataset_0z6",
+						"referenceName": "AzureSqlTable_sink_datalake",
 						"type": "DatasetReference"
 					}
 				]
