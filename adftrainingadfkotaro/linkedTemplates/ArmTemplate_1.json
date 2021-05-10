@@ -4,7 +4,7 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "データ ファクトリ名",
+			"metadata": "Data Factory name",
 			"defaultValue": "adftrainingadfkotaro"
 		},
 		"Trigger_2we_properties_pipeline_parameters_windowStart": {
@@ -546,7 +546,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Stopped",
+				"runtimeState": "Started",
 				"pipeline": {
 					"pipelineReference": {
 						"referenceName": "blob_to_sql_lastmodifieddate",
