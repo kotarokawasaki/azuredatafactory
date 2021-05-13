@@ -107,14 +107,6 @@
 				"type": "string"
 			}
 		},
-		"variables": {
-			"start": {
-				"type": "String"
-			},
-			"end": {
-				"type": "String"
-			}
-		},
 		"annotations": []
 	}
 }
