@@ -31,6 +31,14 @@
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
+		"myself_trigger_properties_pipeline_parameters_starttime": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"myself_trigger_properties_pipeline_parameters_endtime": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
 		"trigger_for_copy_training_pipeline_properties_pipeline_parameters_start": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
@@ -352,20 +360,7 @@
 					{
 						"name": "copy_activity",
 						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Set variable2",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set variable1",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
+						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -420,32 +415,6 @@
 								"parameters": {}
 							}
 						]
-					},
-					{
-						"name": "Set variable1",
-						"type": "SetVariable",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "start",
-							"value": {
-								"value": "@pipeline().parameters.start",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set variable2",
-						"type": "SetVariable",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "end",
-							"value": {
-								"value": "@pipeline().parameters.end",
-								"type": "Expression"
-							}
-						}
 					}
 				],
 				"parameters": {
@@ -454,14 +423,6 @@
 					},
 					"end": {
 						"type": "string"
-					}
-				},
-				"variables": {
-					"start": {
-						"type": "String"
-					},
-					"end": {
-						"type": "String"
 					}
 				},
 				"annotations": []
@@ -633,6 +594,84 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/myself_copy_activity')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "my_copy",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "ExcelSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"modifiedDatetimeStart": {
+										"value": "@formatDatetime(pipeline().parameters.starttime)",
+										"type": "Expression"
+									},
+									"modifiedDatetimeEnd": {
+										"value": "@formatDatetime(pipeline().parameters.endtime)",
+										"type": "Expression"
+									},
+									"wildcardFileName": "*",
+									"enablePartitionDiscovery": false
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"enableSkipIncompatibleRow": true,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceDataset_blob_excel",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_sql_table",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"parameters": {
+					"starttime": {
+						"type": "string"
+					},
+					"endtime": {
+						"type": "string"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Trigger_2we')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -755,12 +794,47 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/trigger_for_copy_training_pipeline')]",
+			"name": "[concat(parameters('factoryName'), '/myself_trigger')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"runtimeState": "Started",
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "myself_copy_activity",
+						"type": "PipelineReference"
+					},
+					"parameters": {
+						"starttime": "[parameters('myself_trigger_properties_pipeline_parameters_starttime')]",
+						"endtime": "[parameters('myself_trigger_properties_pipeline_parameters_endtime')]"
+					}
+				},
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Minute",
+					"interval": 5,
+					"startTime": "2021-05-13T04:35:00Z",
+					"endTime": "2021-05-14T04:12:00Z",
+					"delay": "00:00:00",
+					"maxConcurrency": 50,
+					"retryPolicy": {
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/myself_copy_activity')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger_for_copy_training_pipeline')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
 				"pipeline": {
 					"pipelineReference": {
 						"referenceName": "copy_training",
