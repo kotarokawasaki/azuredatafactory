@@ -55,14 +55,6 @@
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
-		"datalakegen2exceltosql_properties_pipeline_parameters_windowStart": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowStartTime"
-		},
-		"datalakegen2exceltosql_properties_pipeline_parameters_windowEnd": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndTime"
-		},
 		"myself_trigger_properties_pipeline_parameters_starttime": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
@@ -159,12 +151,6 @@
 					},
 					"Trigger_exceltosql_properties_pipeline_parameters_windowEnd": {
 						"value": "[parameters('Trigger_exceltosql_properties_pipeline_parameters_windowEnd')]"
-					},
-					"datalakegen2exceltosql_properties_pipeline_parameters_windowStart": {
-						"value": "[parameters('datalakegen2exceltosql_properties_pipeline_parameters_windowStart')]"
-					},
-					"datalakegen2exceltosql_properties_pipeline_parameters_windowEnd": {
-						"value": "[parameters('datalakegen2exceltosql_properties_pipeline_parameters_windowEnd')]"
 					},
 					"myself_trigger_properties_pipeline_parameters_starttime": {
 						"value": "[parameters('myself_trigger_properties_pipeline_parameters_starttime')]"
