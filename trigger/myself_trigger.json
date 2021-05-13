@@ -1,0 +1,30 @@
+{
+	"name": "myself_trigger",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipeline": {
+			"pipelineReference": {
+				"referenceName": "myself_copy_activity",
+				"type": "PipelineReference"
+			},
+			"parameters": {
+				"starttime": "@trigger().outputs.windowStartTime",
+				"endtime": "@trigger().outputs.windowEndTime"
+			}
+		},
+		"type": "TumblingWindowTrigger",
+		"typeProperties": {
+			"frequency": "Minute",
+			"interval": 5,
+			"startTime": "2021-05-13T04:12:00Z",
+			"endTime": "2021-05-14T04:12:00Z",
+			"delay": "00:00:00",
+			"maxConcurrency": 50,
+			"retryPolicy": {
+				"intervalInSeconds": 30
+			},
+			"dependsOn": []
+		}
+	}
+}
