@@ -62,6 +62,14 @@
 		"datalakegen2exceltosql_properties_pipeline_parameters_windowEnd": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"trigger_for_copy_training_pipeline_properties_pipeline_parameters_start": {
+			"type": "string",
+			"defaultValue": "trigger().outputs.windowStartTime"
+		},
+		"trigger_for_copy_training_pipeline_properties_pipeline_parameters_end": {
+			"type": "string",
+			"defaultValue": "trigger().outputs.windowEndTime"
 		}
 	},
 	"variables": {
@@ -280,8 +288,14 @@
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,
-									"modifiedDatetimeStart": "2021-05-12T02:20:00.000Z",
-									"modifiedDatetimeEnd": "2021-05-14T00:00:00.000Z",
+									"modifiedDatetimeStart": {
+										"value": "@pipeline().parameters.start",
+										"type": "Expression"
+									},
+									"modifiedDatetimeEnd": {
+										"value": "@pipeline().parameters.end",
+										"type": "Expression"
+									},
 									"wildcardFileName": "*",
 									"enablePartitionDiscovery": false
 								}
@@ -316,6 +330,22 @@
 						]
 					}
 				],
+				"parameters": {
+					"start": {
+						"type": "string"
+					},
+					"end": {
+						"type": "string"
+					}
+				},
+				"variables": {
+					"start": {
+						"type": "String"
+					},
+					"end": {
+						"type": "String"
+					}
+				},
 				"annotations": []
 			},
 			"dependsOn": [
@@ -1148,7 +1178,10 @@
 						"referenceName": "copy_training",
 						"type": "PipelineReference"
 					},
-					"parameters": {}
+					"parameters": {
+						"start": "[parameters('trigger_for_copy_training_pipeline_properties_pipeline_parameters_start')]",
+						"end": "[parameters('trigger_for_copy_training_pipeline_properties_pipeline_parameters_end')]"
+					}
 				},
 				"type": "TumblingWindowTrigger",
 				"typeProperties": {
