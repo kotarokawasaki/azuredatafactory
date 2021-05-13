@@ -20,8 +20,14 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
-							"modifiedDatetimeStart": "2021-05-12T02:20:00.000Z",
-							"modifiedDatetimeEnd": "2021-05-14T00:00:00.000Z",
+							"modifiedDatetimeStart": {
+								"value": "@pipeline().parameters.start",
+								"type": "Expression"
+							},
+							"modifiedDatetimeEnd": {
+								"value": "@pipeline().parameters.end",
+								"type": "Expression"
+							},
 							"wildcardFileName": "*",
 							"enablePartitionDiscovery": false
 						}
