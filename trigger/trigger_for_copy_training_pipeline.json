@@ -7,6 +7,10 @@
 			"pipelineReference": {
 				"referenceName": "copy_training",
 				"type": "PipelineReference"
+			},
+			"parameters": {
+				"start": "trigger().outputs.windowStartTime",
+				"end": "trigger().outputs.windowEndTime"
 			}
 		},
 		"type": "TumblingWindowTrigger",

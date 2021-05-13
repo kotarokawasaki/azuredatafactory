@@ -54,6 +54,22 @@
 				]
 			}
 		],
+		"parameters": {
+			"start": {
+				"type": "string"
+			},
+			"end": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"start": {
+				"type": "String"
+			},
+			"end": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
