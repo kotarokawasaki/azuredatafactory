@@ -65,11 +65,11 @@
 		},
 		"trigger_for_copy_training_pipeline_properties_pipeline_parameters_start": {
 			"type": "string",
-			"defaultValue": "trigger().outputs.windowStartTime"
+			"defaultValue": "@trigger().outputs.windowStartTime"
 		},
 		"trigger_for_copy_training_pipeline_properties_pipeline_parameters_end": {
 			"type": "string",
-			"defaultValue": "trigger().outputs.windowEndTime"
+			"defaultValue": "@trigger().outputs.windowEndTime"
 		}
 	},
 	"variables": {

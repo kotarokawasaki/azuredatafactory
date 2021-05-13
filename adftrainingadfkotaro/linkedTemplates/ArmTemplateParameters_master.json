@@ -48,10 +48,10 @@
 			"value": "@trigger().outputs.windowEndTime"
 		},
 		"trigger_for_copy_training_pipeline_properties_pipeline_parameters_start": {
-			"value": "trigger().outputs.windowStartTime"
+			"value": "@trigger().outputs.windowStartTime"
 		},
 		"trigger_for_copy_training_pipeline_properties_pipeline_parameters_end": {
-			"value": "trigger().outputs.windowEndTime"
+			"value": "@trigger().outputs.windowEndTime"
 		},
 		"containerUri": {
 			"value": ""
