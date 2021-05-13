@@ -384,7 +384,7 @@
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "demo"
+					"table": "primarykey"
 				}
 			},
 			"dependsOn": [
