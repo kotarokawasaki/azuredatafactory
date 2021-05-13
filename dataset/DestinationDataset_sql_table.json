@@ -1,5 +1,5 @@
 {
-	"name": "DestinationDataset_2we",
+	"name": "DestinationDataset_sql_table",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase1",
@@ -7,10 +7,23 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": [],
+		"schema": [
+			{
+				"name": "col1",
+				"type": "varchar"
+			},
+			{
+				"name": "col2",
+				"type": "varchar"
+			},
+			{
+				"name": "col3",
+				"type": "varchar"
+			}
+		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "primarykey"
+			"table": "demo"
 		}
 	}
 }

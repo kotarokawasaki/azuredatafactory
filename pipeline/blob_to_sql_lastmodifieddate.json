@@ -100,13 +100,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SourceDataset_2we",
+						"referenceName": "SourceDataset_blob_excel",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DestinationDataset_2we",
+						"referenceName": "DestinationDataset_sql_table",
 						"type": "DatasetReference"
 					}
 				]
