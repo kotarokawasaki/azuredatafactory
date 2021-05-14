@@ -67,6 +67,14 @@
 									"storeSettings": {
 										"type": "AzureBlobStorageReadSettings",
 										"recursive": true,
+										"modifiedDatetimeStart": {
+											"value": "@{formatDateTime(pipeline().parameters.starttime)}",
+											"type": "Expression"
+										},
+										"modifiedDatetimeEnd": {
+											"value": "@{formatDateTime(pipeline().parameters.endtime)}",
+											"type": "Expression"
+										},
 										"wildcardFileName": "*sheet.xlsx",
 										"enablePartitionDiscovery": false
 									}
