@@ -41,6 +41,12 @@
 		"Trigger_exceltosql_properties_pipeline_parameters_windowEnd": {
 			"value": "@trigger().outputs.windowEndTime"
 		},
+		"multiplesheet_tumbling_properties_pipeline_parameters_starttime": {
+			"value": "@trigger().outputs.windowStartTime"
+		},
+		"multiplesheet_tumbling_properties_pipeline_parameters_endtime": {
+			"value": "@trigger().outputs.windowEndTime"
+		},
 		"myself_trigger_properties_pipeline_parameters_starttime": {
 			"value": "@trigger().outputs.windowStartTime"
 		},
