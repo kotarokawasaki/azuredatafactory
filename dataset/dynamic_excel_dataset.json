@@ -1,34 +1,28 @@
 {
-	"name": "SourceDataset_blob_excel",
+	"name": "dynamic_excel_dataset",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureBlobStorage1",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"SHEETNAME": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
-			"sheetName": "Sheet1",
+			"sheetName": {
+				"value": "@dataset().SHEETNAME",
+				"type": "Expression"
+			},
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "sheetname.xlsx",
 				"container": "sheetnamelist"
 			},
 			"firstRowAsHeader": true
 		},
-		"schema": [
-			{
-				"name": "col1",
-				"type": "String"
-			},
-			{
-				"name": "col2",
-				"type": "String"
-			},
-			{
-				"name": "col3",
-				"type": "String"
-			}
-		]
+		"schema": []
 	}
 }
