@@ -4,7 +4,7 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Data Factory name",
+			"metadata": "データ ファクトリ名",
 			"defaultValue": "adftrainingadfkotaro"
 		},
 		"Trigger_2we_properties_pipeline_parameters_windowStart": {
@@ -23,11 +23,11 @@
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
-		"multiplesheet_tumbling_properties_pipeline_parameters_starttime": {
+		"multiplesheet__tumbling_properties_pipeline_parameters_starttime": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
 		},
-		"multiplesheet_tumbling_properties_pipeline_parameters_endtime": {
+		"multiplesheet__tumbling_properties_pipeline_parameters_endtime": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
@@ -723,20 +723,20 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/multiplesheet_tumbling')]",
+			"name": "[concat(parameters('factoryName'), '/multiplesheet__tumbling')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Stopped",
+				"runtimeState": "Started",
 				"pipeline": {
 					"pipelineReference": {
 						"referenceName": "multiple_sheet_copy",
 						"type": "PipelineReference"
 					},
 					"parameters": {
-						"starttime": "[parameters('multiplesheet_tumbling_properties_pipeline_parameters_starttime')]",
-						"endtime": "[parameters('multiplesheet_tumbling_properties_pipeline_parameters_endtime')]"
+						"starttime": "[parameters('multiplesheet__tumbling_properties_pipeline_parameters_starttime')]",
+						"endtime": "[parameters('multiplesheet__tumbling_properties_pipeline_parameters_endtime')]"
 					}
 				},
 				"type": "TumblingWindowTrigger",

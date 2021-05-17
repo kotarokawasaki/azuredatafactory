@@ -4,32 +4,32 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "Data Factory name",
+			"metadata": "データ ファクトリ名",
 			"defaultValue": "adftrainingadfkotaro"
 		},
 		"AzureBlobStorage1_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
+			"metadata": "'AzureBlobStorage1' の 'connectionString' のセキュリティで保護された文字列"
 		},
 		"AzureSqlDatabase1_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+			"metadata": "'AzureSqlDatabase1' の 'connectionString' のセキュリティで保護された文字列"
 		},
 		"CosmosDbMongoDbApi1_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'CosmosDbMongoDbApi1'"
+			"metadata": "'CosmosDbMongoDbApi1' の 'connectionString' のセキュリティで保護された文字列"
 		},
 		"datalake2_linkedservice_accountKey": {
 			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'datalake2_linkedservice'"
+			"metadata": "'datalake2_linkedservice' の 'accountKey' のセキュリティで保護された文字列"
 		},
 		"exceldedicated_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'exceldedicated'"
+			"metadata": "'exceldedicated' の 'connectionString' のセキュリティで保護された文字列"
 		},
 		"linkedService4_connectionString": {
 			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'linkedService4'"
+			"metadata": "'linkedService4' の 'connectionString' のセキュリティで保護された文字列"
 		},
 		"CosmosDbMongoDbApi1_properties_typeProperties_database": {
 			"type": "string",
@@ -55,11 +55,11 @@
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
-		"multiplesheet_tumbling_properties_pipeline_parameters_starttime": {
+		"multiplesheet__tumbling_properties_pipeline_parameters_starttime": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
 		},
-		"multiplesheet_tumbling_properties_pipeline_parameters_endtime": {
+		"multiplesheet__tumbling_properties_pipeline_parameters_endtime": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
@@ -1180,20 +1180,20 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/multiplesheet_tumbling')]",
+			"name": "[concat(parameters('factoryName'), '/multiplesheet__tumbling')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Stopped",
+				"runtimeState": "Started",
 				"pipeline": {
 					"pipelineReference": {
 						"referenceName": "multiple_sheet_copy",
 						"type": "PipelineReference"
 					},
 					"parameters": {
-						"starttime": "[parameters('multiplesheet_tumbling_properties_pipeline_parameters_starttime')]",
-						"endtime": "[parameters('multiplesheet_tumbling_properties_pipeline_parameters_endtime')]"
+						"starttime": "[parameters('multiplesheet__tumbling_properties_pipeline_parameters_starttime')]",
+						"endtime": "[parameters('multiplesheet__tumbling_properties_pipeline_parameters_endtime')]"
 					}
 				},
 				"type": "TumblingWindowTrigger",
