@@ -171,6 +171,26 @@
 					},
 					"myself_trigger_properties_pipeline_parameters_endtime": {
 						"value": "[parameters('myself_trigger_properties_pipeline_parameters_endtime')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adftrainingadfkotaro_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "adftrainingadfkotaro_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
 					},
 					"trigger_for_copy_training_pipeline_properties_pipeline_parameters_start": {
 						"value": "[parameters('trigger_for_copy_training_pipeline_properties_pipeline_parameters_start')]"
@@ -181,7 +201,7 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'adftrainingadfkotaro_ArmTemplate_0')]"
+				"[resourceId('Microsoft.Resources/deployments', 'adftrainingadfkotaro_ArmTemplate_1')]"
 			]
 		}
 	]
