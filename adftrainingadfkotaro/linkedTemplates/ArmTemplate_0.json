@@ -272,7 +272,8 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"container": "source"
+						"fileName": "Book1.xlsx",
+						"container": "sourcedata"
 					}
 				}
 			},
