@@ -4,32 +4,32 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "データ ファクトリ名",
+			"metadata": "Data Factory name",
 			"defaultValue": "adftrainingadfkotaro"
 		},
 		"AzureBlobStorage1_connectionString": {
 			"type": "secureString",
-			"metadata": "'AzureBlobStorage1' の 'connectionString' のセキュリティで保護された文字列"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
 		},
 		"AzureSqlDatabase1_connectionString": {
 			"type": "secureString",
-			"metadata": "'AzureSqlDatabase1' の 'connectionString' のセキュリティで保護された文字列"
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
 		},
 		"CosmosDbMongoDbApi1_connectionString": {
 			"type": "secureString",
-			"metadata": "'CosmosDbMongoDbApi1' の 'connectionString' のセキュリティで保護された文字列"
+			"metadata": "Secure string for 'connectionString' of 'CosmosDbMongoDbApi1'"
 		},
 		"datalake2_linkedservice_accountKey": {
 			"type": "secureString",
-			"metadata": "'datalake2_linkedservice' の 'accountKey' のセキュリティで保護された文字列"
+			"metadata": "Secure string for 'accountKey' of 'datalake2_linkedservice'"
 		},
 		"exceldedicated_connectionString": {
 			"type": "secureString",
-			"metadata": "'exceldedicated' の 'connectionString' のセキュリティで保護された文字列"
+			"metadata": "Secure string for 'connectionString' of 'exceldedicated'"
 		},
 		"linkedService4_connectionString": {
 			"type": "secureString",
-			"metadata": "'linkedService4' の 'connectionString' のセキュリティで保護された文字列"
+			"metadata": "Secure string for 'connectionString' of 'linkedService4'"
 		},
 		"CosmosDbMongoDbApi1_properties_typeProperties_database": {
 			"type": "string",
@@ -297,6 +297,66 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/SourceDataset_blob_excel')]",
 				"[concat(variables('factoryId'), '/datasets/DestinationDataset_sql_table')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/foralert')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "alert_copy",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "Binary_dataset",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Binary_dataset_source",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Binary_dataset')]",
+				"[concat(variables('factoryId'), '/datasets/Binary_dataset_source')]"
 			]
 		},
 		{
@@ -572,6 +632,50 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Binary_dataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "source"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Binary_dataset_source')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "source"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
 			]
 		},
 		{
@@ -1185,7 +1289,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Started",
+				"runtimeState": "Stopped",
 				"pipeline": {
 					"pipelineReference": {
 						"referenceName": "multiple_sheet_copy",

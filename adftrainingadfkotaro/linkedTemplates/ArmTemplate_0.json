@@ -4,32 +4,32 @@
 	"parameters": {
 		"factoryName": {
 			"type": "string",
-			"metadata": "データ ファクトリ名",
+			"metadata": "Data Factory name",
 			"defaultValue": "adftrainingadfkotaro"
 		},
 		"AzureBlobStorage1_connectionString": {
 			"type": "secureString",
-			"metadata": "'AzureBlobStorage1' の 'connectionString' のセキュリティで保護された文字列"
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
 		},
 		"AzureSqlDatabase1_connectionString": {
 			"type": "secureString",
-			"metadata": "'AzureSqlDatabase1' の 'connectionString' のセキュリティで保護された文字列"
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
 		},
 		"CosmosDbMongoDbApi1_connectionString": {
 			"type": "secureString",
-			"metadata": "'CosmosDbMongoDbApi1' の 'connectionString' のセキュリティで保護された文字列"
+			"metadata": "Secure string for 'connectionString' of 'CosmosDbMongoDbApi1'"
 		},
 		"datalake2_linkedservice_accountKey": {
 			"type": "secureString",
-			"metadata": "'datalake2_linkedservice' の 'accountKey' のセキュリティで保護された文字列"
+			"metadata": "Secure string for 'accountKey' of 'datalake2_linkedservice'"
 		},
 		"exceldedicated_connectionString": {
 			"type": "secureString",
-			"metadata": "'exceldedicated' の 'connectionString' のセキュリティで保護された文字列"
+			"metadata": "Secure string for 'connectionString' of 'exceldedicated'"
 		},
 		"linkedService4_connectionString": {
 			"type": "secureString",
-			"metadata": "'linkedService4' の 'connectionString' のセキュリティで保護された文字列"
+			"metadata": "Secure string for 'connectionString' of 'linkedService4'"
 		},
 		"CosmosDbMongoDbApi1_properties_typeProperties_database": {
 			"type": "string",
@@ -259,6 +259,50 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Binary_dataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "source"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Binary_dataset_source')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "source"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -430,67 +474,6 @@
 						"container": "destination"
 					}
 				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SourceDataset_0z6')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "datalake2_linkedservice",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileSystem": "source"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/datalake2_linkedservice')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/SourceDataset_blob_excel')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStorage1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "Sheet1",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "sheetname.xlsx",
-						"container": "sheetnamelist"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "col1",
-						"type": "String"
-					},
-					{
-						"name": "col2",
-						"type": "String"
-					},
-					{
-						"name": "col3",
-						"type": "String"
-					}
-				]
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
