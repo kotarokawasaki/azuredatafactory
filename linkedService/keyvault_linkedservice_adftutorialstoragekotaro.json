@@ -1,0 +1,10 @@
+{
+	"name": "keyvault_linkedservice_adftutorialstoragekotaro",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://keyvaultforreproduction.vault.azure.net/"
+		}
+	}
+}
