@@ -1,0 +1,17 @@
+{
+	"name": "adftutorialstoragekotaro_keyvault",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "keyvault_linkedservice_adftutorialstoragekotaro",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "adftutorialstoragekotaro00connectionString"
+			}
+		}
+	}
+}
