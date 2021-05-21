@@ -59,6 +59,12 @@
 		"trigger_for_copy_training_pipeline_properties_pipeline_parameters_end": {
 			"value": "@trigger().outputs.windowEndTime"
 		},
+		"keyvault_linkedservice_adftutorialstoragekotaro_properties_typeProperties_baseUrl": {
+			"value": "https://keyvaultforreproduction.vault.azure.net/"
+		},
+		"adftutorialstoragekotaro_keyvault_properties_typeProperties_connectionString_secretName": {
+			"value": "adftutorialstoragekotaro00connectionString"
+		},
 		"containerUri": {
 			"value": ""
 		},

@@ -78,6 +78,14 @@
 		"trigger_for_copy_training_pipeline_properties_pipeline_parameters_end": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"keyvault_linkedservice_adftutorialstoragekotaro_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://keyvaultforreproduction.vault.azure.net/"
+		},
+		"adftutorialstoragekotaro_keyvault_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "adftutorialstoragekotaro00connectionString"
 		}
 	},
 	"variables": {
@@ -1561,6 +1569,41 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/keyvault_linkedservice_adftutorialstoragekotaro')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('keyvault_linkedservice_adftutorialstoragekotaro_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/adftutorialstoragekotaro_keyvault')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "keyvault_linkedservice_adftutorialstoragekotaro",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "[parameters('adftutorialstoragekotaro_keyvault_properties_typeProperties_connectionString_secretName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/keyvault_linkedservice_adftutorialstoragekotaro')]"
+			]
 		}
 	]
 }

@@ -79,6 +79,14 @@
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
+		"keyvault_linkedservice_adftutorialstoragekotaro_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://keyvaultforreproduction.vault.azure.net/"
+		},
+		"adftutorialstoragekotaro_keyvault_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "adftutorialstoragekotaro00connectionString"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -129,6 +137,9 @@
 					},
 					"datalake2_linkedservice_properties_typeProperties_url": {
 						"value": "[parameters('datalake2_linkedservice_properties_typeProperties_url')]"
+					},
+					"keyvault_linkedservice_adftutorialstoragekotaro_properties_typeProperties_baseUrl": {
+						"value": "[parameters('keyvault_linkedservice_adftutorialstoragekotaro_properties_typeProperties_baseUrl')]"
 					}
 				}
 			},
@@ -148,6 +159,9 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"adftutorialstoragekotaro_keyvault_properties_typeProperties_connectionString_secretName": {
+						"value": "[parameters('adftutorialstoragekotaro_keyvault_properties_typeProperties_connectionString_secretName')]"
+					},
 					"Trigger_2we_properties_pipeline_parameters_windowStart": {
 						"value": "[parameters('Trigger_2we_properties_pipeline_parameters_windowStart')]"
 					},
@@ -159,18 +173,6 @@
 					},
 					"Trigger_exceltosql_properties_pipeline_parameters_windowEnd": {
 						"value": "[parameters('Trigger_exceltosql_properties_pipeline_parameters_windowEnd')]"
-					},
-					"multiplesheet__tumbling_properties_pipeline_parameters_starttime": {
-						"value": "[parameters('multiplesheet__tumbling_properties_pipeline_parameters_starttime')]"
-					},
-					"multiplesheet__tumbling_properties_pipeline_parameters_endtime": {
-						"value": "[parameters('multiplesheet__tumbling_properties_pipeline_parameters_endtime')]"
-					},
-					"myself_trigger_properties_pipeline_parameters_starttime": {
-						"value": "[parameters('myself_trigger_properties_pipeline_parameters_starttime')]"
-					},
-					"myself_trigger_properties_pipeline_parameters_endtime": {
-						"value": "[parameters('myself_trigger_properties_pipeline_parameters_endtime')]"
 					}
 				}
 			},
@@ -191,6 +193,18 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"multiplesheet__tumbling_properties_pipeline_parameters_starttime": {
+						"value": "[parameters('multiplesheet__tumbling_properties_pipeline_parameters_starttime')]"
+					},
+					"multiplesheet__tumbling_properties_pipeline_parameters_endtime": {
+						"value": "[parameters('multiplesheet__tumbling_properties_pipeline_parameters_endtime')]"
+					},
+					"myself_trigger_properties_pipeline_parameters_starttime": {
+						"value": "[parameters('myself_trigger_properties_pipeline_parameters_starttime')]"
+					},
+					"myself_trigger_properties_pipeline_parameters_endtime": {
+						"value": "[parameters('myself_trigger_properties_pipeline_parameters_endtime')]"
 					},
 					"trigger_for_copy_training_pipeline_properties_pipeline_parameters_start": {
 						"value": "[parameters('trigger_for_copy_training_pipeline_properties_pipeline_parameters_start')]"
