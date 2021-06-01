@@ -90,6 +90,17 @@
 		"trigger_for_copy_training_pipeline_properties_pipeline_parameters_end": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+			"type": "string",
+			"defaultValue": "server00learning.database.windows.net"
+		},
+		"SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
+			"type": "string",
+			"defaultValue": "kkawasaki"
+		},
+		"SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
+			"type": "secureString"
 		}
 	},
 	"variables": {
@@ -383,7 +394,14 @@
 					{
 						"name": "fileshare_copy",
 						"type": "Copy",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Execute Pipeline1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -412,18 +430,81 @@
 									"maxConcurrentConnections": 1
 								}
 							},
-							"enableStaging": false
+							"enableStaging": false,
+							"dataIntegrationUnits": 16
 						},
 						"inputs": [
 							{
-								"referenceName": "fileshare_dataset3",
+								"referenceName": "fileshare_dataset1",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "fileshare_dataset4",
+								"referenceName": "fileshare_dataset2",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Execute Pipeline1",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "fileshare_case",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": false,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "fileshare_copy_copy1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureFileStorageReadSettings",
+									"recursive": true,
+									"deleteFilesAfterCompletion": false
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureFileStorageWriteSettings",
+									"maxConcurrentConnections": 1
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "fileshare_dataset1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "fileshare_dataset2",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -433,8 +514,9 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/fileshare_dataset3')]",
-				"[concat(variables('factoryId'), '/datasets/fileshare_dataset4')]"
+				"[concat(variables('factoryId'), '/datasets/fileshare_dataset1')]",
+				"[concat(variables('factoryId'), '/datasets/fileshare_dataset2')]",
+				"[concat(variables('factoryId'), '/pipelines/fileshare_case')]"
 			]
 		},
 		{
@@ -1075,7 +1157,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureFileStorage_linkedservice2",
+					"referenceName": "AzureFileStorage_linkedservice",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
@@ -1089,7 +1171,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureFileStorage_linkedservice2')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureFileStorage_linkedservice')]"
 			]
 		},
 		{
@@ -1098,7 +1180,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureFileStorage_linkedservice2",
+					"referenceName": "AzureFileStorage_linkedservice",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
@@ -1106,12 +1188,12 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureFileStorageLocation",
-						"folderPath": "d2"
+						"folderPath": "d1"
 					}
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureFileStorage_linkedservice2')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureFileStorage_linkedservice')]"
 			]
 		},
 		{
@@ -1151,7 +1233,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureFileStorageLocation",
-						"folderPath": "d2"
+						"folderPath": "d1"
 					}
 				}
 			},
@@ -1182,15 +1264,9 @@
 				"typeProperties": {
 					"connectionString": "[parameters('AzureFileStorage_linkedservice_connectionString')]",
 					"fileShare": "fileshare1"
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1",
-					"type": "IntegrationRuntimeReference"
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureFileStorage_linkedservice2')]",
@@ -1541,6 +1617,40 @@
 						"intervalInSeconds": 30
 					},
 					"dependsOn": []
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SSISIR')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "Managed",
+				"typeProperties": {
+					"computeProperties": {
+						"location": "Japan East",
+						"nodeSize": "Standard_D8_v3",
+						"numberOfNodes": 2,
+						"maxParallelExecutionsPerNode": 8,
+						"vNetProperties": {
+							"vNetId": "/subscriptions/9dd76ffc-5184-4d37-9638-8de2234ecd00/resourceGroups/ADFtraining/providers/Microsoft.Network/virtualNetworks/ADFtraining-vnet",
+							"subnet": "default"
+						}
+					},
+					"ssisProperties": {
+						"catalogInfo": {
+							"catalogServerEndpoint": "[parameters('SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint')]",
+							"catalogAdminUserName": "[parameters('SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName')]",
+							"catalogAdminPassword": {
+								"type": "SecureString",
+								"value": "[parameters('SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword')]"
+							},
+							"catalogPricingTier": "S1"
+						},
+						"edition": "Standard",
+						"licenseType": "LicenseIncluded"
+					}
 				}
 			},
 			"dependsOn": []

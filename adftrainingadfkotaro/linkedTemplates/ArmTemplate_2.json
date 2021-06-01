@@ -7,22 +7,6 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adftrainingadfkotaro"
 		},
-		"multiplesheet__tumbling_properties_pipeline_parameters_starttime": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowStartTime"
-		},
-		"multiplesheet__tumbling_properties_pipeline_parameters_endtime": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndTime"
-		},
-		"myself_trigger_properties_pipeline_parameters_starttime": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowStartTime"
-		},
-		"myself_trigger_properties_pipeline_parameters_endtime": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndTime"
-		},
 		"trigger_for_copy_training_pipeline_properties_pipeline_parameters_start": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowStartTime"
@@ -36,72 +20,6 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
-		{
-			"name": "[concat(parameters('factoryName'), '/multiplesheet__tumbling')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "multiple_sheet_copy",
-						"type": "PipelineReference"
-					},
-					"parameters": {
-						"starttime": "[parameters('multiplesheet__tumbling_properties_pipeline_parameters_starttime')]",
-						"endtime": "[parameters('multiplesheet__tumbling_properties_pipeline_parameters_endtime')]"
-					}
-				},
-				"type": "TumblingWindowTrigger",
-				"typeProperties": {
-					"frequency": "Minute",
-					"interval": 5,
-					"startTime": "2021-05-14T10:05:00Z",
-					"endTime": "2021-05-15T09:55:00Z",
-					"delay": "00:00:00",
-					"maxConcurrency": 50,
-					"retryPolicy": {
-						"intervalInSeconds": 30
-					},
-					"dependsOn": []
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/myself_trigger')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "myself_copy_activity",
-						"type": "PipelineReference"
-					},
-					"parameters": {
-						"starttime": "[parameters('myself_trigger_properties_pipeline_parameters_starttime')]",
-						"endtime": "[parameters('myself_trigger_properties_pipeline_parameters_endtime')]"
-					}
-				},
-				"type": "TumblingWindowTrigger",
-				"typeProperties": {
-					"frequency": "Minute",
-					"interval": 5,
-					"startTime": "2021-05-13T04:35:00Z",
-					"endTime": "2021-05-14T04:12:00Z",
-					"delay": "00:00:00",
-					"maxConcurrency": 50,
-					"retryPolicy": {
-						"intervalInSeconds": 30
-					},
-					"dependsOn": []
-				}
-			},
-			"dependsOn": []
-		},
 		{
 			"name": "[concat(parameters('factoryName'), '/trigger_for_copy_training_pipeline')]",
 			"type": "Microsoft.DataFactory/factories/triggers",

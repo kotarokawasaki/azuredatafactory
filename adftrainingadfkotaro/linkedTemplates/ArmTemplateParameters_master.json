@@ -68,6 +68,15 @@
 		"trigger_for_copy_training_pipeline_properties_pipeline_parameters_end": {
 			"value": "@trigger().outputs.windowEndTime"
 		},
+		"SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+			"value": "server00learning.database.windows.net"
+		},
+		"SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
+			"value": "kkawasaki"
+		},
+		"SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
+			"value": ""
+		},
 		"containerUri": {
 			"value": ""
 		},

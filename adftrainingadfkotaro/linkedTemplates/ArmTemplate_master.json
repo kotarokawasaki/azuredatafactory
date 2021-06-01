@@ -91,6 +91,17 @@
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
+		"SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+			"type": "string",
+			"defaultValue": "server00learning.database.windows.net"
+		},
+		"SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
+			"type": "string",
+			"defaultValue": "kkawasaki"
+		},
+		"SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
+			"type": "secureString"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -121,6 +132,9 @@
 					"AzureBlobStorage1_connectionString": {
 						"value": "[parameters('AzureBlobStorage1_connectionString')]"
 					},
+					"AzureFileStorage_linkedservice_connectionString": {
+						"value": "[parameters('AzureFileStorage_linkedservice_connectionString')]"
+					},
 					"AzureSqlDatabase1_connectionString": {
 						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
 					},
@@ -141,6 +155,15 @@
 					},
 					"keyvault_linkedservice_adftutorialstoragekotaro_properties_typeProperties_baseUrl": {
 						"value": "[parameters('keyvault_linkedservice_adftutorialstoragekotaro_properties_typeProperties_baseUrl')]"
+					},
+					"SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint": {
+						"value": "[parameters('SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogServerEndpoint')]"
+					},
+					"SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName": {
+						"value": "[parameters('SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminUserName')]"
+					},
+					"SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword": {
+						"value": "[parameters('SSISIR_properties_typeProperties_ssisProperties_catalogInfo_catalogAdminPassword')]"
 					}
 				}
 			},
@@ -159,9 +182,6 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
-					},
-					"AzureFileStorage_linkedservice_connectionString": {
-						"value": "[parameters('AzureFileStorage_linkedservice_connectionString')]"
 					},
 					"AzureFileStorage_linkedservice2_connectionString": {
 						"value": "[parameters('AzureFileStorage_linkedservice2_connectionString')]"
@@ -192,6 +212,26 @@
 					},
 					"myself_trigger_properties_pipeline_parameters_endtime": {
 						"value": "[parameters('myself_trigger_properties_pipeline_parameters_endtime')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adftrainingadfkotaro_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "adftrainingadfkotaro_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
 					},
 					"trigger_for_copy_training_pipeline_properties_pipeline_parameters_start": {
 						"value": "[parameters('trigger_for_copy_training_pipeline_properties_pipeline_parameters_start')]"
@@ -202,7 +242,7 @@
 				}
 			},
 			"dependsOn": [
-				"[resourceId('Microsoft.Resources/deployments', 'adftrainingadfkotaro_ArmTemplate_0')]"
+				"[resourceId('Microsoft.Resources/deployments', 'adftrainingadfkotaro_ArmTemplate_1')]"
 			]
 		}
 	]
