@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureFileStorage_linkedservice'"
 		},
+		"AzureFileStorage_linkedservice2_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureFileStorage_linkedservice2'"
+		},
 		"AzureSqlDatabase1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
@@ -158,6 +162,9 @@
 					},
 					"AzureFileStorage_linkedservice_connectionString": {
 						"value": "[parameters('AzureFileStorage_linkedservice_connectionString')]"
+					},
+					"AzureFileStorage_linkedservice2_connectionString": {
+						"value": "[parameters('AzureFileStorage_linkedservice2_connectionString')]"
 					},
 					"adftutorialstoragekotaro_keyvault_properties_typeProperties_connectionString_secretName": {
 						"value": "[parameters('adftutorialstoragekotaro_keyvault_properties_typeProperties_connectionString_secretName')]"

@@ -11,6 +11,9 @@
 		"AzureFileStorage_linkedservice_connectionString": {
 			"value": ""
 		},
+		"AzureFileStorage_linkedservice2_connectionString": {
+			"value": ""
+		},
 		"AzureSqlDatabase1_connectionString": {
 			"value": ""
 		},
