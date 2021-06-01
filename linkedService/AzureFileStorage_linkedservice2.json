@@ -1,0 +1,17 @@
+{
+	"name": "AzureFileStorage_linkedservice2",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureFileStorage",
+		"typeProperties": {
+			"connectionString": "DefaultEndpointsProtocol=https;AccountName=adftutorialstoragekotaro;EndpointSuffix=core.windows.net;",
+			"fileShare": "fileshare1",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIzOGE5YmZmNC1mYmRjLTQ2YjktOWNlOS05MjYxMmNiMjU4NmEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntime1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
