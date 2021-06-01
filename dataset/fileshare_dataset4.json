@@ -1,5 +1,5 @@
 {
-	"name": "fileshare_dataset1",
+	"name": "fileshare_dataset4",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureFileStorage_linkedservice2",
@@ -10,8 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureFileStorageLocation",
-				"fileName": "sample.txt",
-				"folderPath": "d1"
+				"folderPath": "d2"
 			}
 		}
 	}

@@ -1,5 +1,5 @@
 {
-	"name": "fileshare_dataset1",
+	"name": "fileshare_dataset3",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureFileStorage_linkedservice2",

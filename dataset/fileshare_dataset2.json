@@ -2,7 +2,7 @@
 	"name": "fileshare_dataset2",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureFileStorage_linkedservice",
+			"referenceName": "AzureFileStorage_linkedservice2",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],

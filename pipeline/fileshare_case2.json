@@ -38,13 +38,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "fileshare_dataset1",
+						"referenceName": "fileshare_dataset3",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "fileshare_dataset2",
+						"referenceName": "fileshare_dataset4",
 						"type": "DatasetReference"
 					}
 				]
