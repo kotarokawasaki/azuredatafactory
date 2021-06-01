@@ -7,7 +7,11 @@
 				"location": "Japan East",
 				"nodeSize": "Standard_D8_v3",
 				"numberOfNodes": 2,
-				"maxParallelExecutionsPerNode": 8
+				"maxParallelExecutionsPerNode": 8,
+				"vNetProperties": {
+					"vNetId": "/subscriptions/9dd76ffc-5184-4d37-9638-8de2234ecd00/resourceGroups/ADFtraining/providers/Microsoft.Network/virtualNetworks/ADFtraining-vnet",
+					"subnet": "default"
+				}
 			},
 			"ssisProperties": {
 				"catalogInfo": {
