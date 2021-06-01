@@ -8,13 +8,13 @@
 		"AzureBlobStorage1_connectionString": {
 			"value": ""
 		},
+		"AzureFileStorage_linkedservice_connectionString": {
+			"value": ""
+		},
 		"AzureSqlDatabase1_connectionString": {
 			"value": ""
 		},
 		"CosmosDbMongoDbApi1_connectionString": {
-			"value": ""
-		},
-		"datalake2_linkedservice_accountKey": {
 			"value": ""
 		},
 		"exceldedicated_connectionString": {
@@ -26,8 +26,14 @@
 		"CosmosDbMongoDbApi1_properties_typeProperties_database": {
 			"value": "database1"
 		},
+		"adftutorialstoragekotaro_keyvault_properties_typeProperties_connectionString_secretName": {
+			"value": "adftutorialstoragekotaro00connectionString"
+		},
 		"datalake2_linkedservice_properties_typeProperties_url": {
 			"value": "https://datalakegen2kotaro.dfs.core.windows.net"
+		},
+		"keyvault_linkedservice_adftutorialstoragekotaro_properties_typeProperties_baseUrl": {
+			"value": "https://keyvaultforreproduction.vault.azure.net/"
 		},
 		"Trigger_2we_properties_pipeline_parameters_windowStart": {
 			"value": "@trigger().outputs.windowStartTime"
@@ -58,12 +64,6 @@
 		},
 		"trigger_for_copy_training_pipeline_properties_pipeline_parameters_end": {
 			"value": "@trigger().outputs.windowEndTime"
-		},
-		"keyvault_linkedservice_adftutorialstoragekotaro_properties_typeProperties_baseUrl": {
-			"value": "https://keyvaultforreproduction.vault.azure.net/"
-		},
-		"adftutorialstoragekotaro_keyvault_properties_typeProperties_connectionString_secretName": {
-			"value": "adftutorialstoragekotaro00connectionString"
 		},
 		"containerUri": {
 			"value": ""
