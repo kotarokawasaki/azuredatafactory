@@ -206,12 +206,6 @@
 					},
 					"multiplesheet__tumbling_properties_pipeline_parameters_endtime": {
 						"value": "[parameters('multiplesheet__tumbling_properties_pipeline_parameters_endtime')]"
-					},
-					"myself_trigger_properties_pipeline_parameters_starttime": {
-						"value": "[parameters('myself_trigger_properties_pipeline_parameters_starttime')]"
-					},
-					"myself_trigger_properties_pipeline_parameters_endtime": {
-						"value": "[parameters('myself_trigger_properties_pipeline_parameters_endtime')]"
 					}
 				}
 			},
@@ -232,6 +226,12 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"myself_trigger_properties_pipeline_parameters_starttime": {
+						"value": "[parameters('myself_trigger_properties_pipeline_parameters_starttime')]"
+					},
+					"myself_trigger_properties_pipeline_parameters_endtime": {
+						"value": "[parameters('myself_trigger_properties_pipeline_parameters_endtime')]"
 					},
 					"trigger_for_copy_training_pipeline_properties_pipeline_parameters_start": {
 						"value": "[parameters('trigger_for_copy_training_pipeline_properties_pipeline_parameters_start')]"
