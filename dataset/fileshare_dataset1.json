@@ -10,7 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureFileStorageLocation",
-				"fileName": "sample.txt",
 				"folderPath": "d1"
 			}
 		}

@@ -10,7 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "Book1.xlsx",
 				"container": "sourcedata"
 			}
 		}
