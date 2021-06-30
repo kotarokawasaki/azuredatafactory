@@ -159,7 +159,14 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "fileshare_case",
+							"referenceName": "blob_to_fileshare_schedule1",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "blob_to_fileshare_schedule2",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
