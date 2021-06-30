@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": "sample2.txt",
 				"container": "sourcedata"
 			}
 		}

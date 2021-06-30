@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "fileshare_copy",
+				"name": "blob_fileshare_schedule",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -18,10 +18,9 @@
 					"source": {
 						"type": "BinarySource",
 						"storeSettings": {
-							"type": "AzureFileStorageReadSettings",
+							"type": "AzureBlobStorageReadSettings",
 							"maxConcurrentConnections": 1,
-							"recursive": true,
-							"deleteFilesAfterCompletion": false
+							"recursive": true
 						},
 						"formatSettings": {
 							"type": "BinaryReadSettings"
@@ -38,7 +37,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "fileshare_dataset1",
+						"referenceName": "Binary_dataset",
 						"type": "DatasetReference"
 					}
 				],
