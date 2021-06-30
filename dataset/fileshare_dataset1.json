@@ -2,15 +2,16 @@
 	"name": "fileshare_dataset1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureFileStorage_linkedservice",
+			"referenceName": "AzureBlobStorage1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "Binary",
 		"typeProperties": {
 			"location": {
-				"type": "AzureFileStorageLocation",
-				"folderPath": "d1"
+				"type": "AzureBlobStorageLocation",
+				"fileName": "sample2.txt",
+				"container": "sourcedata"
 			}
 		}
 	}
