@@ -27,6 +27,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'CosmosDbMongoDbApi1'"
 		},
+		"SqlServer1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SqlServer1'"
+		},
+		"SqlServer1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer1'"
+		},
 		"exceldedicated_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'exceldedicated'"
@@ -38,6 +46,10 @@
 		"CosmosDbMongoDbApi1_properties_typeProperties_database": {
 			"type": "string",
 			"defaultValue": "database1"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "kkawasaki"
 		},
 		"adftutorialstoragekotaro_keyvault_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
@@ -186,6 +198,15 @@
 					"AzureFileStorage_linkedservice2_connectionString": {
 						"value": "[parameters('AzureFileStorage_linkedservice2_connectionString')]"
 					},
+					"SqlServer1_connectionString": {
+						"value": "[parameters('SqlServer1_connectionString')]"
+					},
+					"SqlServer1_password": {
+						"value": "[parameters('SqlServer1_password')]"
+					},
+					"SqlServer1_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_userName')]"
+					},
 					"adftutorialstoragekotaro_keyvault_properties_typeProperties_connectionString_secretName": {
 						"value": "[parameters('adftutorialstoragekotaro_keyvault_properties_typeProperties_connectionString_secretName')]"
 					},
@@ -194,18 +215,6 @@
 					},
 					"Trigger_2we_properties_pipeline_parameters_windowEnd": {
 						"value": "[parameters('Trigger_2we_properties_pipeline_parameters_windowEnd')]"
-					},
-					"Trigger_exceltosql_properties_pipeline_parameters_windowStart": {
-						"value": "[parameters('Trigger_exceltosql_properties_pipeline_parameters_windowStart')]"
-					},
-					"Trigger_exceltosql_properties_pipeline_parameters_windowEnd": {
-						"value": "[parameters('Trigger_exceltosql_properties_pipeline_parameters_windowEnd')]"
-					},
-					"multiplesheet__tumbling_properties_pipeline_parameters_starttime": {
-						"value": "[parameters('multiplesheet__tumbling_properties_pipeline_parameters_starttime')]"
-					},
-					"multiplesheet__tumbling_properties_pipeline_parameters_endtime": {
-						"value": "[parameters('multiplesheet__tumbling_properties_pipeline_parameters_endtime')]"
 					}
 				}
 			},
@@ -226,6 +235,18 @@
 				"parameters": {
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
+					},
+					"Trigger_exceltosql_properties_pipeline_parameters_windowStart": {
+						"value": "[parameters('Trigger_exceltosql_properties_pipeline_parameters_windowStart')]"
+					},
+					"Trigger_exceltosql_properties_pipeline_parameters_windowEnd": {
+						"value": "[parameters('Trigger_exceltosql_properties_pipeline_parameters_windowEnd')]"
+					},
+					"multiplesheet__tumbling_properties_pipeline_parameters_starttime": {
+						"value": "[parameters('multiplesheet__tumbling_properties_pipeline_parameters_starttime')]"
+					},
+					"multiplesheet__tumbling_properties_pipeline_parameters_endtime": {
+						"value": "[parameters('multiplesheet__tumbling_properties_pipeline_parameters_endtime')]"
 					},
 					"myself_trigger_properties_pipeline_parameters_starttime": {
 						"value": "[parameters('myself_trigger_properties_pipeline_parameters_starttime')]"

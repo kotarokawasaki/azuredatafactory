@@ -20,6 +20,12 @@
 		"CosmosDbMongoDbApi1_connectionString": {
 			"value": ""
 		},
+		"SqlServer1_connectionString": {
+			"value": ""
+		},
+		"SqlServer1_password": {
+			"value": ""
+		},
 		"exceldedicated_connectionString": {
 			"value": ""
 		},
@@ -28,6 +34,9 @@
 		},
 		"CosmosDbMongoDbApi1_properties_typeProperties_database": {
 			"value": "database1"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"value": "kkawasaki"
 		},
 		"adftutorialstoragekotaro_keyvault_properties_typeProperties_connectionString_secretName": {
 			"value": "adftutorialstoragekotaro00connectionString"

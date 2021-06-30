@@ -27,6 +27,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'CosmosDbMongoDbApi1'"
 		},
+		"SqlServer1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SqlServer1'"
+		},
+		"SqlServer1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer1'"
+		},
 		"exceldedicated_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'exceldedicated'"
@@ -38,6 +46,10 @@
 		"CosmosDbMongoDbApi1_properties_typeProperties_database": {
 			"type": "string",
 			"defaultValue": "database1"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "kkawasaki"
 		},
 		"adftutorialstoragekotaro_keyvault_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
@@ -523,7 +535,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "fileshare_copy",
+						"name": "blob_fileshare_schedule",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -538,10 +550,9 @@
 							"source": {
 								"type": "BinarySource",
 								"storeSettings": {
-									"type": "AzureFileStorageReadSettings",
+									"type": "AzureBlobStorageReadSettings",
 									"maxConcurrentConnections": 1,
-									"recursive": true,
-									"deleteFilesAfterCompletion": false
+									"recursive": true
 								},
 								"formatSettings": {
 									"type": "BinaryReadSettings"
@@ -558,7 +569,7 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "fileshare_dataset1",
+								"referenceName": "Binary_dataset",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -575,7 +586,7 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/fileshare_dataset1')]",
+				"[concat(variables('factoryId'), '/datasets/Binary_dataset')]",
 				"[concat(variables('factoryId'), '/datasets/fileshare_dataset2')]"
 			]
 		},
@@ -608,10 +619,9 @@
 							"source": {
 								"type": "BinarySource",
 								"storeSettings": {
-									"type": "AzureFileStorageReadSettings",
+									"type": "AzureBlobStorageReadSettings",
 									"maxConcurrentConnections": 1,
-									"recursive": true,
-									"deleteFilesAfterCompletion": false
+									"recursive": true
 								},
 								"formatSettings": {
 									"type": "BinaryReadSettings"
@@ -672,9 +682,8 @@
 							"source": {
 								"type": "BinarySource",
 								"storeSettings": {
-									"type": "AzureFileStorageReadSettings",
-									"recursive": true,
-									"deleteFilesAfterCompletion": false
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
 								},
 								"formatSettings": {
 									"type": "BinaryReadSettings"
@@ -1021,7 +1030,7 @@
 							"source": {
 								"type": "BinarySource",
 								"storeSettings": {
-									"type": "AzureFileStorageReadSettings",
+									"type": "AzureBlobStorageReadSettings",
 									"maxConcurrentConnections": 1,
 									"recursive": true
 								},
@@ -1146,6 +1155,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
+						"fileName": "sample2.txt",
 						"container": "sourcedata"
 					}
 				}
@@ -1350,20 +1360,21 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureFileStorage_linkedservice",
+					"referenceName": "AzureBlobStorage1",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
 				"type": "Binary",
 				"typeProperties": {
 					"location": {
-						"type": "AzureFileStorageLocation",
-						"folderPath": "d1"
+						"type": "AzureBlobStorageLocation",
+						"fileName": "sample2.txt",
+						"container": "sourcedata"
 					}
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureFileStorage_linkedservice')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
 			]
 		},
 		{
@@ -1506,6 +1517,30 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServer1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('SqlServer1_connectionString')]",
+					"userName": "[parameters('SqlServer1_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('SqlServer1_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "shirsqlserver",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/shirsqlserver')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/adftutorialstoragekotaro_keyvault')]",
@@ -1756,6 +1791,36 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/schedule_trigger')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "fileshare_case",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Minute",
+						"interval": 2,
+						"startTime": "2021-06-30T06:30:00",
+						"timeZone": "Tokyo Standard Time"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/fileshare_case')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/trigger_for_copy_training_pipeline')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -1814,6 +1879,16 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/SHIR')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SSISIR')]",
 			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
 			"apiVersion": "2018-06-01",
@@ -1858,22 +1933,12 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/integrationRuntimeforreproduce')]",
+			"name": "[concat(parameters('factoryName'), '/shirsqlserver')]",
 			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"type": "Managed",
-				"typeProperties": {
-					"computeProperties": {
-						"location": "Japan East",
-						"dataFlowProperties": {
-							"computeType": "General",
-							"coreCount": 8,
-							"timeToLive": 10,
-							"cleanup": true
-						}
-					}
-				}
+				"type": "SelfHosted",
+				"typeProperties": {}
 			},
 			"dependsOn": []
 		}
