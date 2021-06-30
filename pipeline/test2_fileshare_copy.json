@@ -62,7 +62,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "fileshare_case",
+						"referenceName": "blob_to_fileshare_schedule1",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": false
